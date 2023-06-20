@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Manutenção</title>
+</head>
+<body>
+  <h2>Sistema de Manutenção</h2>
+  
+  <div>
+    <label for="nomeMaquina">Nome da Máquina:</label>
+    <input type="text" id="nomeMaquina">
+  </div>
+  <div>
+    <label for="defeito">Defeito:</label>
+    <input type="text" id="defeito">
+  </div>
+  <div>
+    <label for="solucao">Solução:</label>
+    <input type="text" id="solucao">
+  </div>
+  <div>
+    <label for="manutentor">Manutentor:</label>
+    <input type="text" id="manutentor">
+  </div>
+  <div>
+    <label for="dataManutencao">Data de Manutenção:</label>
+    <input type="date" id="dataManutencao">
+  </div>
+  <div>
+    <button onclick="adicionarRegistro()">Adicionar</button>
+  </div>
+  
+  <hr>
+  
+  <div>
+    <label for="numeroRegistro">Número de Registro:</label>
+    <input type="number" id="numeroRegistro">
+    <button onclick="pesquisarRegistros()">Buscar</button>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Nome da Máquina</th>
+        <th>Defeito</th>
+        <th>Solução</th>
+        <th>Manutentor</th>
+        <th>Data de Manutenção</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  
+  <script>
+// Variável para armazenar os registros
+var registros = [];
+
+// Função para adicionar um registro
+function adicionarRegistro() {
+  // Obter os valores dos campos de entrada
+  var nomeMaquina = document.getElementById('nomeMaquina').value;
+  var defeito = document.getElementById('defeito').value;
+  var solucao = document.getElementById('solucao').value;
+  var manutentor = document.getElementById('manutentor').value;
+  var dataManutencao = document.getElementById('dataManutencao').value;
+  
+  // Gerar um número único para o registro
+  var numeroRegistro = registros.length + 1;
+  
+  // Criar um objeto com os dados do registro
+  var novoRegistro = {
+    numero: numeroRegistro,
+    nomeMaquina: nomeMaquina,
+    defeito: defeito,
+    solucao: solucao,
+    manutentor: manutentor,
+    dataManutencao: dataManutencao
+  };
+  
+  // Adicionar o registro à lista de registros
+  registros.push(novoRegistro);
+  
+  // Limpar os campos de entrada
+  document.getElementById('nomeMaquina').value = '';
+  document.getElementById('defeito').value = '';
+  document.getElementById('solucao').value = '';
+  document.getElementById('manutentor').value = '';
+  document.getElementById('dataManutencao').value = '';
+  
+  // Exibir o número do registro
+  alert('Registro adicionado com o número: ' + numeroRegistro);
+}
+
+// Função para pesquisar e exibir os registros na tabela
+function pesquisarRegistros() {
+  // Obter o número de registro pesquisado
+  var numeroRegistro = document.getElementById('numeroRegistro').value;
+  
+  // Buscar o registro correspondente na lista de registros
+  var registroEncontrado = registros.find(function(registro) {
+    return registro.numero === parseInt(numeroRegistro);
+  });
+  
+  // Verificar se o registro foi encontrado
+  if (registroEncontrado) {
+    // Exibir os dados do registro na tabela
+    document.getElementById('tableBody').innerHTML = `
+      <tr>
+        <td>${registroEncontrado.numero}</td>
+        <td>${registroEncontrado.nomeMaquina}</td>
+        <td>${registroEncontrado.defeito}</td>
+        <td>${registroEncontrado.solucao}</td>
+        <td>${registroEncontrado.manutentor}</td>
+        <td>${registroEncontrado.dataManutencao}</td>
+      </tr>
+    `;
+  } else {
+    // Limpar a tabela se o registro não foi encontrado
+    document.getElementById('tableBody').innerHTML = '';
+    alert('Registro não encontrado');
+  }
+  
+  // Limpar o campo de pesquisa
+  document.getElementById('numeroRegistro').value = '';
+}
+
+  </script><br><br><br><br><br><br>
+<label for="nome">Nome:</label>
+<input type="text" id="nome">
+
+<p>Este é um parágrafo de texto <span style="color: red;">com uma parte em vermelho</span>.</p>
+
+<label for="tipoManutencao">Tipo de Manutenção:</label>
+<select id="tipoManutencao" required>
+  <option value="">Selecione o tipo de manutenção</option>
+  <option value="Preventiva">Manutenção Preventiva</option>
+  <option value="Corretiva">Manutenção Corretiva</option>
+  <option value="Preditiva">Manutenção Preditiva</option>
+</select><br>
+
+
+<label for="tipoConsulta">Tipo de Consulta:</label>
+<select id="tipoConsulta" required>
+  <option value="">Selecione o tipo de consulta</option>
+  <option value="Exame">Exame</option>
+  <option value="Consulta">Consulta</option>
+  <option value="Cirurgia">Cirurgia</option>
+</select><br>
+
+<script src="jsdo.js"></script>
+</body>
+</html>
